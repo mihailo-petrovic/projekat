@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
-    <div id="regForm" class="forma disNone">
+    <div id="regForm" class="formDiv disNone">
+      <p id="regMessage" class="disNone"></p>
       <h3>Sign Up</h3>
       <form id="registration">
         <input
@@ -36,8 +37,9 @@
       </form>
     </div>
 
-    <div id="logForm" class="forma">
-      <h3>Sign In</h3>
+    <div id="logForm" class="formDiv">
+      <p id="logMessage" class="disNone"></p>
+      <h3>Login</h3>
       <form id="login">
         <input
           type="text"
@@ -53,7 +55,7 @@
           placeholder="Password"
           autocomplete="off"
         /><br />
-        <input type="submit" value="Sign In" />
+        <input type="submit" value="Sign in" />
       </form>
       <p>...or if you are not registered, <a id="regLink">register here!</a></p>
     </div>
