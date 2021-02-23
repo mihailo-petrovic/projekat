@@ -5,11 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Završni projekat</title>
-    
+
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div id="cont"></div>
-    <script src="./js/main.js"></script>
+    <div id="cont">
+      <header id="header">
+        <a href="#"><h3>My Movie Lists</h3></a>
+        <ul id="menuList">
+          <li><a id="searchLink">Search</a></li>
+          <li><a href="#" id="settingsLink">Settings</a></li>
+          <li><a href="#" id="logOutLink">Log Out</a></li>
+        </ul>
+      </header>
+
+      <div id="listCont">
+        <div id="watchlistDiv"></div>
+        <div id="ratedDiv"></div>
+        <div id="favouritesDiv"></div>
+      </div>
+
+      <div id="searchCont">
+        <div id="searchDiv">
+          <input
+            type="search"
+            name="searchInput"
+            id="searchInput"
+            placeholder="Search for movies..."
+          />
+          <button id="searchBtn">Search</button>
+        </div>
+        <br />
+        <div id="searchResults"></div>
+      </div>
+
+      <footer id="footer">
+        <span
+          >created by
+          <strong
+            ><a href="https://github.com/mihailo-petrovic" target="_blank"
+              >mihailo-petrovic</a
+            ></strong
+          ></span
+        >
+      </footer>
+    </div>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

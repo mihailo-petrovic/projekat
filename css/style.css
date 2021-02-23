@@ -1,10 +1,190 @@
-body {
-    background-color: rgb(31, 31, 31);
-    color: whitesmoke;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
 }
 
-.logo_small{
-    border-radius: 20px;
-    width: 150px;
+:root {
+  --ff-primary: "Noto Sans JP", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --clr-light: rgb(236, 236, 236);
+  --clr-dark: rgb(19, 6, 6);
+  --clr-green: rgb(37, 107, 58);
+  --clr-yellow: rgb(228, 225, 44);
+  --bs: 0.3em 0.3em 0.7em rgba(0, 0, 0, 0.3),
+    0.15em 0.15em 0.8em rgba(0, 0, 0, 0.35);
+}
+
+body {
+  background-color: var(--clr-dark);
+  color: var(--clr-light);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+/* MAIN */
+#header {
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  background-color: var(--clr-green);
+  display: flex;
+  align-items: center;
+}
+
+#header h3 {
+  font-size: 1.5em;
+  margin-left: 30px;
+}
+
+#menuList {
+  list-style-type: none;
+  display: flex;
+  position: absolute;
+  right: 30px;
+}
+#menuList li {
+  margin-left: 30px;
+  font-size: 1.2em;
+}
+#header a,
+#footer a {
+  text-decoration: none;
+  color: var(--clr-light);
+}
+#menuList li a:hover,
+#footer a:hover {
+  cursor: pointer;
+  color: var(--clr-yellow);
+}
+
+#listCont {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+/* SEARCH */
+#searchCont {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--clr-light);
+  color: var(--clr-dark);
+}
+
+#searchDiv {
+  height: 60px;
+  line-height: 60px;
+  margin: 20px;
+  text-align: center;
+}
+
+#searchInput {
+  width: 350px;
+  height: 30px;
+  padding-left: 10px;
+  border-radius: 7px;
+  font-size: 15px;
+  border: 2px solid var(--clr-green);
+  color: var(--clr-green);
+}
+#searchInput:focus {
+  outline: none;
+}
+
+#searchBtn {
+  height: 30px;
+  width: 67px;
+  border-radius: 7px;
+  font-size: 15px;
+  background-color: var(--clr-green);
+  color: var(--clr-light);
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+#searchBtn:hover {
+  cursor: pointer;
+  background-color: var(--clr-yellow);
+  color: var(--clr-dark);
+  transform: translateX(10px);
+}
+#searchBtn:focus {
+  outline: none;
+  background-color: var(--clr-yellow);
+  color: var(--clr-dark);
+  transform: translateX(10px);
+}
+
+.movieTag {
+  min-height: 30px;
+  color: var(--clr-green);
+}
+.movieTag > summary {
+  list-style: none;
+  outline: none;
+}
+.movieTag > summary::-webkit-details-marker {
+  display: none;
+}
+.movieTag summary:hover {
+  cursor: pointer;
+}
+
+#footer {
+  bottom: 0px;
+  width: 100vw;
+  height: 50px;
+  background-color: var(--clr-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+  #header h3 {
+    font-size: 1em;
+    margin-left: 20px;
+  }
+
+  #menuList {
+    font-size: 0.9em;
+    right: 15px;
+  }
+
+  #searchInput {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #header h3 {
+    font-size: 0.7em;
+    margin-left: 10px;
+  }
+
+  #menuList {
+    font-size: 0.8em;
+  }
+  #menuList li {
+    margin-left: 20px;
+  }
+
+  #searchInput {
+    width: 220px;
+  }
+  #searchDiv {
+    line-height: 60px;
+    margin: 20px 0px 60px 0px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  #header h3 {
+    display: none;
+  }
+  #searchDiv {
+    width: 100vw;
+  }
 }

@@ -1,5 +1,6 @@
 // Variables
 const regLink = document.getElementById("regLink");
+const logLink = document.getElementById("logLink");
 const regForm = document.getElementById("regForm");
 const logForm = document.getElementById("logForm");
 const login = document.getElementById("login");
@@ -15,9 +16,18 @@ const logUserPass = document.getElementById("password");
 let users, user;
 
 // Listeners
+window.onload = () => {
+  localStorage.removeItem("loggedInTMDBUser");
+};
+
 regLink.addEventListener("click", () => {
   logForm.classList.add("disNone");
   regForm.classList.remove("disNone");
+});
+
+logLink.addEventListener("click", () => {
+  logForm.classList.remove("disNone");
+  regForm.classList.add("disNone");
 });
 
 registration.onsubmit = (e) => {
@@ -37,7 +47,7 @@ function registerUser() {
   let pass2 = regPass2Input.value;
 
   let userReg = /[a-zA-Z]{5,20}/;
-  let passReg = /(?=.*[0-9]){8,30}/;
+  let passReg = /[a-zA-Z0-9]{7,20}\d+/;
 
   // Testing user entries
   if (!userReg.test(username)) {
@@ -48,7 +58,7 @@ function registerUser() {
   }
   if (!passReg.test(pass1)) {
     regMessage.innerText =
-      "Password needs to contain 8 characters and one digit";
+      "Password needs to contain 8-20 characters and 1+ digits";
     regMessage.classList.remove("disNone");
     regPass1Input.style.border = "1.5px solid rgb(161, 17, 17)";
     regPass2Input.style.border = "1.5px solid rgb(161, 17, 17)";
@@ -83,7 +93,7 @@ function pushUser(username, password) {
     username: username,
     password: password,
     likedMovies: [],
-    watchLater: [],
+    watchlist: [],
     ratedMovies: [],
   };
   users.push(user);
@@ -112,21 +122,21 @@ function loginUser() {
   }
 
   if (password === obj.password) {
-    clearForms();
     localStorage.setItem("loggedInTMDBUser", JSON.stringify(obj));
+    clearForms();
     window.location = "../main.html";
   }
 }
 
-function clearForms(){
+function clearForms() {
   logMessage.classList.add("disNone");
   regMessage.classList.add("disNone");
-  regUserInput.value = '';
-  regPass1Input.value = '';
-  regPass2Input.value = '';
-  logUserInput.value = '';
-  logUserPass.value = '';
-  regUserInput.style.border = 'none';
-  regPass1Input.style.border = 'none';
-  regPass2Input.style.border = 'none';
+  regUserInput.value = "";
+  regPass1Input.value = "";
+  regPass2Input.value = "";
+  logUserInput.value = "";
+  logUserPass.value = "";
+  regUserInput.style.border = "none";
+  regPass1Input.style.border = "none";
+  regPass2Input.style.border = "none";
 }

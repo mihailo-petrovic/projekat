@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Završni projekat | Logovanje</title>
+    <title>Završni projekat | Login</title>
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
     <div id="regForm" class="formDiv disNone">
-      <p id="regMessage" class="disNone"></p>
+      <p id="regMessage" class="alertMsg disNone"></p>
       <h3>Sign Up</h3>
       <form id="registration">
         <input
@@ -18,27 +18,30 @@
           id="regUsername"
           placeholder="Enter Username"
           autocomplete="on"
-        /><br />
+        />
         <input
           type="password"
           name="regPassword1"
           id="regPassword1"
           placeholder="Enter Password"
           autocomplete="off"
-        /><br />
+        />
         <input
           type="password"
           name="regPassword2"
           id="regPassword2"
           placeholder="Repeat Password"
           autocomplete="off"
-        /><br />
+        />
         <input type="submit" value="Register" />
+        <p>
+          <a id="logLink" class="linkL">Login </a>
+        </p>
       </form>
     </div>
 
     <div id="logForm" class="formDiv">
-      <p id="logMessage" class="disNone"></p>
+      <p id="logMessage" class="alertMsg disNone"></p>
       <h3>Login</h3>
       <form id="login">
         <input
@@ -47,17 +50,20 @@
           id="username"
           placeholder="Username"
           autocomplete="on"
-        /><br />
+        />
         <input
           type="password"
           name="password"
           id="password"
           placeholder="Password"
           autocomplete="off"
-        /><br />
+        />
         <input type="submit" value="Sign in" />
       </form>
-      <p>...or if you are not registered, <a id="regLink">register here!</a></p>
+      <p>
+        ...or if you are not registered,
+        <a id="regLink" class="linkL">register here!</a>
+      </p>
     </div>
 
     <script src="./js/login.js"></script>

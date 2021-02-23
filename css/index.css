@@ -63,6 +63,11 @@ input[type="submit"] {
   font-size: 17px;
 }
 
+input[type="text"],
+input[type="password"] {
+  margin-bottom: 1.5em;
+}
+
 input[type="submit"] {
   margin-top: 15px;
   width: 65%;
@@ -72,22 +77,18 @@ input[type="submit"]:hover {
   cursor: pointer;
   background-color: var(--clr-yellow);
 }
+input[type="submit"]:focus {
+  background-color: var(--clr-yellow);
+}
 
-#regLink:hover {
+.linkL:hover {
   cursor: pointer;
   color: var(--clr-yellow);
 }
 
-#regMessage {
+.alertMsg {
   position: absolute;
-  top: 15px;
-  font-size: x-small;
-  color: rgb(161, 17, 17);
-}
-
-#logMessage {
-  position: absolute;
-  top: 10px;
+  top: 0px;
   font-size: x-small;
   color: rgb(161, 17, 17);
 }
