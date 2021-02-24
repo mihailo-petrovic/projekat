@@ -1,5 +1,4 @@
 import searchMovies from "./searchMovies.js";
-import showResults from "./searchMovies.js";
 
 window.onload = () => {
   if (!localStorage.getItem("loggedInTMDBUser")) {
@@ -16,7 +15,7 @@ const searchBtn = document.getElementById("searchBtn");
 const listContainer = document.getElementById("listCont");
 const resultsContainer = document.getElementById("searchResults");
 
-let user = JSON.parse(localStorage.getItem("loggedInTMDBUser"));
+// let username = JSON.parse(localStorage.getItem("loggedInTMDBUser"));
 // let watchlist = user.watchlist;
 // let likedMovies = user.likedMovies;
 // let ratedMovies = user.ratedMovies;

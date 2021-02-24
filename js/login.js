@@ -122,7 +122,7 @@ function loginUser() {
   }
 
   if (password === obj.password) {
-    localStorage.setItem("loggedInTMDBUser", JSON.stringify(obj));
+    localStorage.setItem("loggedInTMDBUser", JSON.stringify(obj.username));
     clearForms();
     window.location = "../main.html";
   }
