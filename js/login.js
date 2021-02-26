@@ -92,7 +92,7 @@ function pushUser(username, password) {
   user = {
     username: username,
     password: password,
-    likedMovies: [],
+    favorites: [],
     watchlist: [],
     ratedMovies: [],
   };

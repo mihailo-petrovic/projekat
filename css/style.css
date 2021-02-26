@@ -65,6 +65,23 @@ body {
   width: 100vw;
   min-height: 100vh;
   background-color: var(--clr-dark);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "wl rated favs";
+}
+
+#watchlistCont {
+  grid-area: "wl";
+}
+
+#ratedCont {
+  grid-area: "rated";
+  border-left: 1px solid var(--clr-light);
+  border-right: 1px solid var(--clr-light);
+}
+
+#favoritesCont {
+  grid-area: "favs";
 }
 
 /* SEARCH */
@@ -179,7 +196,7 @@ body {
   justify-content: space-around;
 }
 
-.rateDiv{
+.rateDiv {
   text-align: center;
   margin: 0px 8px;
 }
@@ -190,6 +207,12 @@ body {
 .disabledBtn {
   transform: none;
   background-color: var(--clr-dark);
+  min-height: 30px;
+  padding: 0px 13px;
+  border-radius: 7px;
+  font-size: 15px;
+  color: var(--clr-light);
+  border: none;
 }
 .disabledBtn:hover {
   transform: none;
@@ -245,7 +268,7 @@ body {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   * {
     overflow-x: hidden;
   }

@@ -1,3 +1,5 @@
+import addToList from "./addToList.js";
+
 function searchMovies(userInput, container) {
   if (userInput == "") {
     container.innerHTML = "";
@@ -22,6 +24,7 @@ function searchMovies(userInput, container) {
 
 function showResults(obj, container) {
   const imagePath = "https://image.tmdb.org/t/p/w300/";
+
   container.innerHTML = "";
   if (obj.results.length == 0) {
     container.style.margin = "30px";
@@ -31,9 +34,9 @@ function showResults(obj, container) {
     return;
   }
 
-  obj.results.forEach((movie) => {
-    // overview, release_date, id,
+  for (let movie of obj.results) {
     let imgSrc = movie.poster_path ? imagePath + movie.poster_path : "";
+
     container.innerHTML += `
     <details class="movieTag">
         <summary> <h4>${movie.original_title}</h4> </summary>
@@ -46,7 +49,7 @@ function showResults(obj, container) {
             <p>${movie.overview ? movie.overview : "Not available"}</p>
           </div>
           <div class="actionsDiv">
-            <button class="favsBtn btn">Add To Favorites</button>
+            <button class="favsBtn btn" data-id=${movie.id}>Add To Favorites</button>
             <button class="wlBtn btn">Watch Later</button>            
             <div class="rateDiv">
               <label for="rateMovie">Rate this movie:</label><br>
@@ -63,38 +66,13 @@ function showResults(obj, container) {
         </div>
     </details>
     <hr><br>
-      `;
-  });
+    `;
 
-  let watchlistBtns = document.querySelectorAll(".wlBtn");
-  let favsBtns = document.querySelectorAll(".favsBtn");
-  let rateSelects = document.querySelectorAll(".rateMovie");
-
-  watchlistBtns.forEach((btn) => {
-    btn.addEventListener("click", addToWatchlist);
-  });
-  favsBtns.forEach((btn) => {
-    btn.addEventListener("click", addToFavs);
-  });
-  rateSelects.forEach((s) => {
-    s.addEventListener("change", rateMovie);
-  });
-}
-
-function addToWatchlist(e) {
-  this.classList.add("disabledBtn");
-  this.disabled = true;
-  this.innerText = "Added";
-}
-
-function addToFavs(e) {
-  this.classList.add("disabledBtn");
-  this.disabled = true;
-  this.innerText = "Added";
-}
-
-function rateMovie(e) {
-  console.log(e.target.value);
+    let favBtns = document.querySelectorAll(".favsBtn");
+    favBtns.forEach(b => {
+      b.addEventListener("click", () => addToList(movie.id,"favorites"));
+    })
+  }
 }
 
 export default searchMovies;

@@ -7,11 +7,12 @@
     <title>Završni projekat</title>
 
     <link rel="stylesheet" href="./css/style.css" />
+    <script type="module" src="./js/main.js"></script>
   </head>
   <body>
     <div id="cont">
       <header id="header">
-        <a href="#"><h3>My Movie Lists</h3></a>
+        <a href="#"><h3 id="titleUser"></h3></a>
         <ul id="menuList">
           <li><a id="searchLink">Search</a></li>
           <li><a href="#" id="settingsLink">Settings</a></li>
@@ -20,9 +21,9 @@
       </header>
 
       <div id="listCont">
-        <div id="watchlistDiv"></div>
-        <div id="ratedDiv"></div>
-        <div id="favouritesDiv"></div>
+        <div id="watchlistCont"></div>
+        <div id="ratedCont"></div>
+        <div id="favoritesCont"></div>
       </div>
 
       <div id="searchCont">
@@ -50,6 +51,5 @@
         >
       </footer>
     </div>
-    <script type="module" src="./js/main.js"></script>
   </body>
 </html>
