@@ -70,19 +70,30 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: "wl rated favs";
 }
+#listCont h2 {
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
 
 #watchlistCont {
   grid-area: "wl";
 }
-
-#ratedCont {
+#ratedMoviesCont {
   grid-area: "rated";
   border-left: 1px solid var(--clr-light);
   border-right: 1px solid var(--clr-light);
 }
-
 #favoritesCont {
   grid-area: "favs";
+}
+
+.innerList {
+  color: var(--clr-green);
+  padding: 0px 10px;
+}
+#sortDiv {
+  text-align: center;
+  margin: 10px 0;
 }
 
 /* SEARCH */

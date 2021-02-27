@@ -49,11 +49,13 @@ function showResults(obj, container) {
             <p>${movie.overview ? movie.overview : "Not available"}</p>
           </div>
           <div class="actionsDiv">
-            <button class="favsBtn btn" data-id=${movie.id}>Add To Favorites</button>
-            <button class="wlBtn btn">Watch Later</button>            
+            <button class="favsBtn btn"
+             data-id=${movie.id}>Add To Favorites</button>
+            <button class="wlBtn btn"
+             data-id=${movie.id}>Watch Later</button>            
             <div class="rateDiv">
               <label for="rateMovie">Rate this movie:</label><br>
-              <select name="rateMovie" class="rateMovie">
+              <select data-id=${movie.id} name="rateMovie" class="rateMovie">
                 <option default>-</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -67,10 +69,17 @@ function showResults(obj, container) {
     </details>
     <hr><br>
     `;
-
     let favBtns = document.querySelectorAll(".favsBtn");
-    favBtns.forEach(b => {
-      b.addEventListener("click", () => addToList(movie.id,"favorites"));
+    let wlBtns = document.querySelectorAll(".wlBtn");
+    let ratedSelects = document.querySelectorAll(".rateMovie")
+    favBtns.forEach((b) => {
+      b.addEventListener("click", (e) => addToList(e, 'favorites'));
+    });
+    wlBtns.forEach((b) => {
+      b.addEventListener("click", (e) => addToList(e, 'watchlist'));
+    });
+    ratedSelects.forEach(s => {
+      s.addEventListener("change", (e) => addToList(e, 'ratedMovies'))
     })
   }
 }

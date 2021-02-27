@@ -21,9 +21,26 @@
       </header>
 
       <div id="listCont">
-        <div id="watchlistCont"></div>
-        <div id="ratedCont"></div>
-        <div id="favoritesCont"></div>
+        <div id="watchlistCont" class="list">
+          <h2>Watchlist</h2>
+          <div id="watchlistInnerCont" class="innerList"></div>
+        </div>
+        <div id="ratedMoviesCont" class="list">
+          <h2>Rated Movies</h2>
+          <div id="sortDiv">
+            <label for="sortBySelect">Sort by:</label>
+            <select name="sortBySelect" id="sortBySelect">
+              <option value="myRating">My Rating</option>
+              <option value="avgRating">Averge Rating</option>
+              <option value="timeAdded">Time Rated</option>
+            </select>
+          </div>
+          <div id="ratedMoviesInnerCont" class="innerList"></div>
+        </div>
+        <div id="favoritesCont" class="list">
+          <h2>Favorites</h2>
+          <div id="favoritesInnerCont" class="innerList"></div>
+        </div>
       </div>
 
       <div id="searchCont">
@@ -63,7 +80,7 @@
             id="changeUsername"
             placeholder="Enter new username"
           />
-          <button class="btn" id="saveUsername">Save</button><br>
+          <button class="btn" id="saveUsername">Save</button><br />
           <label for="oldPass">Change your password:</label><br />
           <input
             type="password"
@@ -72,7 +89,7 @@
             id="oldPass"
             autocomplete="on"
             placeholder="Enter old password"
-          /><br>
+          /><br />
           <input
             type="password"
             name="newPass"
@@ -80,11 +97,10 @@
             id="newPass"
             autocomplete="on"
             placeholder="Enter new password"
-          /><br>
-          <button class="btn" id="savePassword">Save</button><br>
+          /><br />
+          <button class="btn" id="savePassword">Save</button><br />
           <button class="btn" id="deleteBtn">Delete Account</button>
           <div id="settingsAlert"></div>
-
         </form>
       </div>
     </div>

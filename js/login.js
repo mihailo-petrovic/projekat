@@ -109,6 +109,9 @@ function loginUser() {
   let password = logUserPass.value;
   let users = JSON.parse(localStorage.getItem("projectTMDBUsers"));
 
+  if (username == "" || password == "") {
+    return;
+  }
   let obj = users.find((user) => username === user.username);
   if (obj == undefined) {
     logMessage.innerText = "No such user";
