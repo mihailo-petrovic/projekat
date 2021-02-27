@@ -15,7 +15,7 @@
         <a href="#"><h3 id="titleUser"></h3></a>
         <ul id="menuList">
           <li><a id="searchLink">Search</a></li>
-          <li><a href="#" id="settingsLink">Settings</a></li>
+          <li><a id="settingsLink">Settings</a></li>
           <li><a href="#" id="logOutLink">Log Out</a></li>
         </ul>
       </header>
@@ -32,6 +32,7 @@
             type="search"
             name="searchInput"
             id="searchInput"
+            class="textInput"
             placeholder="Search for movies..."
           />
           <button id="searchBtn" class="btn">Search</button>
@@ -50,6 +51,42 @@
           ></span
         >
       </footer>
+
+      <div id="settings">
+        <h2 id="exitSettings">&#x2716;</h2>
+        <form id="settingsFormDiv">
+          <label for="changeUsername">Change your username:</label><br />
+          <input
+            type="text"
+            name="changeUsername"
+            class="textInput"
+            id="changeUsername"
+            placeholder="Enter new username"
+          />
+          <button class="btn" id="saveUsername">Save</button><br>
+          <label for="oldPass">Change your password:</label><br />
+          <input
+            type="password"
+            name="oldPass"
+            class="textInput"
+            id="oldPass"
+            autocomplete="on"
+            placeholder="Enter old password"
+          /><br>
+          <input
+            type="password"
+            name="newPass"
+            class="textInput"
+            id="newPass"
+            autocomplete="on"
+            placeholder="Enter new password"
+          /><br>
+          <button class="btn" id="savePassword">Save</button><br>
+          <button class="btn" id="deleteBtn">Delete Account</button>
+          <div id="settingsAlert"></div>
+
+        </form>
+      </div>
     </div>
   </body>
 </html>

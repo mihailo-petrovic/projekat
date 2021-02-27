@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 :root {
@@ -94,14 +95,16 @@ body {
 }
 
 #searchDiv {
-  height: 60px;
+  min-height: 60px;
   line-height: 60px;
   margin: 20px;
   text-align: center;
 }
+#searchDiv input[type="search"] {
+  width: 300px;
+}
 
-#searchInput {
-  width: 350px;
+.textInput {
   height: 30px;
   padding-left: 10px;
   border-radius: 7px;
@@ -109,7 +112,7 @@ body {
   border: 2px solid var(--clr-green);
   color: var(--clr-green);
 }
-#searchInput:focus {
+.textInput:focus {
   outline: none;
 }
 
@@ -231,6 +234,47 @@ body {
   justify-content: center;
 }
 
+#settings {
+  position: fixed;
+  top: 48px;
+  right: 0px;
+  width: 500px;
+  line-height: 2em;
+  height: calc(100vh - 48px);
+  background-color: var(--clr-light);
+  color: var(--clr-green);
+  border: 2px solid var(--clr-green);
+  opacity: 0;
+  transition: var(--transition);
+  display: none;
+}
+#exitSettings {
+  position: fixed;
+  top: 60px;
+  right: 15px;
+}
+#exitSettings:hover {
+  cursor: pointer;
+}
+#settingsFormDiv {
+  margin: 20px;
+}
+#settings input[type="text"],
+#settings input[type="password"] {
+  width: 300px;
+}
+#settings label {
+  display: inline-block;
+  margin-top: 50px;
+}
+#settingsAlert {
+  color: rgb(199, 25, 25);
+}
+#deleteBtn {
+  background-color: rgb(199, 25, 25);
+  margin-top: 30px;
+}
+
 @media screen and (max-width: 700px) {
   #header h3 {
     font-size: 1em;
@@ -266,13 +310,18 @@ body {
     flex-direction: row;
     align-items: space-around;
   }
+
+  #settings {
+    width: 100vw;
+    padding-left: 20px;
+  }
+  #settings input[type="text"],
+  #settings input[type="password"] {
+    width: 200px;
+  }
 }
 
 @media screen and (max-width: 450px) {
-  * {
-    overflow-x: hidden;
-  }
-
   .btn {
     font-size: 0.8em;
   }
@@ -304,6 +353,10 @@ body {
   }
   .imgDiv {
     display: none;
+  }
+  #settings {
+    text-align: center;
+    padding-left: 0;
   }
 }
 
