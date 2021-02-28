@@ -26,6 +26,19 @@ body {
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--clr-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--clr-yellow);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-green);
+}
+
 /* MAIN */
 #header {
   position: fixed;
@@ -89,11 +102,50 @@ body {
 
 .innerList {
   color: var(--clr-green);
-  padding: 0px 10px;
+  padding: 0px 18px;
 }
 #sortDiv {
   text-align: center;
   margin: 10px 0;
+}
+
+.listItem {
+  display: grid;
+  grid-template-areas: "img title";
+  grid-template-columns: 50px auto;
+  padding: 10px 0px;
+  min-height: 100px;
+}
+.listTitleDiv {
+  text-align: center;
+  padding: 0 10px;
+}
+.listTitleDiv button:hover {
+  background-color: rgb(160, 40, 40);
+}
+.listItem h4 {
+  padding: 10px 0;
+  font-size: 1.1em;
+  transition: var(--transition);
+}
+.listItem h4:hover {
+  color: var(--clr-yellow);
+  cursor: pointer;
+}
+.listImgDiv {
+  grid-area: "img";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.listImg {
+  width: 50px;
+  height: auto;
+}
+.listHr {
+  border: none;
+  height: 2px;
+  background-color: var(--clr-light);
 }
 
 /* SEARCH */

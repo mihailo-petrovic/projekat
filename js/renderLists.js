@@ -18,13 +18,21 @@ function renderLists(list) {
         : "favorites"
     }</h3>`;
   } else {
-    let htmlStr = "";
+    container.innerHTML = "";
     for (let el of listFinal) {
       let id = el.id;
-      let movie = getMovie(id);
-      htmlStr += `<h3>${id}</h3>`
+      let rating = el.rating;
+      let moviePromise = getMovie(id);
+      moviePromise.then((movie) => {
+        if (rating) {
+          let item = renderListItem(movie, rating);
+          container.innerHTML += item;
+          return;
+        }
+        let item = renderListItem(movie);
+        container.innerHTML += item;
+      });
     }
-    container.innerHTML = htmlStr;
   }
 }
 
@@ -40,6 +48,42 @@ function getMovie(movieID) {
     })
     .catch(console.error);
   return fetchedMovie;
+}
+
+function renderListItem(movie, rating) {
+  const imagePath = "https://image.tmdb.org/t/p/w300/";
+  let imgSrc = movie.poster_path ? imagePath + movie.poster_path : "";
+  let htmlStr;
+
+  if (rating) {
+    htmlStr = `
+    <div class="listItem">
+      <div class="listImgDiv">
+        <img src="${imgSrc}" class="listImg" />
+      </div>
+      <div class="listTitleDiv">
+        <h4>${movie.title}</h4>
+        <p>${rating} / 5</p>
+        <button class="btn">Remove</button>
+      </div> 
+    </div>
+    <hr class="listHr">
+  `;
+  } else {
+    htmlStr = `
+    <div class="listItem">
+      <div class="listImgDiv">
+        <img src="${imgSrc}" class="listImg" />
+      </div>
+      <div class="listTitleDiv">
+        <h4>${movie.title}</h4>
+        <button class="btn">Remove</button>
+      </div> 
+    </div>
+    <hr class="listHr">
+  `;
+  }
+  return htmlStr;
 }
 
 export default renderLists;
