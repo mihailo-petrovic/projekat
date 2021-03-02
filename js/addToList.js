@@ -11,10 +11,10 @@ function addToList(e, list) {
   let ratedMovies = user.ratedMovies;
 
   if (list === "favorites") {
-    if (favorites.find(x => x.id === movieID) !== undefined) {
+    if (favorites.find((x) => x.id === movieID) !== undefined) {
       return;
     }
-    favorites.push({ id: movieID });
+    favorites.push({ id: movieID, time: new Date() });
     users.splice(index, 1, user);
     localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
     renderLists("favorites");
@@ -22,10 +22,10 @@ function addToList(e, list) {
   }
 
   if (list === "watchlist") {
-    if (watchlist.find(x => x.id === movieID) !== undefined) {
+    if (watchlist.find((x) => x.id === movieID) !== undefined) {
       return;
     }
-    watchlist.push({ id: movieID });
+    watchlist.push({ id: movieID, time: new Date() });
     users.splice(index, 1, user);
     localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
     renderLists("watchlist");
@@ -33,7 +33,7 @@ function addToList(e, list) {
   }
 
   if (list === "ratedMovies") {
-    if (ratedMovies.find(x => x.id === movieID) !== undefined) {
+    if (ratedMovies.find((x) => x.id === movieID) !== undefined) {
       return;
     }
     ratedMovies.push({ id: movieID, rating: e.target.value, time: new Date() });

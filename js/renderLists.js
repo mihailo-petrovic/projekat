@@ -5,9 +5,8 @@ function renderLists(list) {
   let keys = Object.keys(user);
   let listName = keys.find((k) => k === list);
   let listFinal = user[listName];
-
   var container = document.getElementById(list + "InnerCont");
-
+  
   if (listFinal.length == 0) {
     container.innerHTML = `<h3>No movies in the 
     ${
@@ -31,8 +30,12 @@ function renderLists(list) {
         })
         .then(() => {
           let removeBtns = container.querySelectorAll(".removeBtn");
+          let movieTitles = container.querySelectorAll(".movieTitle");
           for (let b of removeBtns) {
             b.addEventListener("click", (e) => removeFromList(e));
+          }
+          for (let t of movieTitles) {
+            t.addEventListener("click", (e) => moreInfo(e));
           }
         });
     }
@@ -65,7 +68,7 @@ function renderListItem(movie, rating) {
         <img src="${imgSrc}" class="listImg" />
       </div>
       <div class="listTitleDiv">
-        <h4>${movie.title}</h4>
+        <h4 data-id=${movie.id} class="movieTitle">${movie.title}</h4>
         <p>${rating} / 5</p>
         <button class="btn removeBtn" data-id=${movie.id}>Remove</button>
       </div> 
@@ -79,7 +82,7 @@ function renderListItem(movie, rating) {
         <img src="${imgSrc}" class="listImg" />
       </div>
       <div class="listTitleDiv">
-        <h4>${movie.title}</h4>
+        <h4 data-id=${movie.id} class="movieTitle">${movie.title}</h4>
         <button class="btn removeBtn" data-id=${movie.id}>Remove</button>
       </div> 
     </div>
@@ -87,6 +90,49 @@ function renderListItem(movie, rating) {
   `;
   }
   return htmlStr;
+}
+
+function moreInfo(e) {
+  let movieID = e.target.dataset.id;
+  let moviePromise = getMovie(movieID);
+  let container = document.getElementById("moreInfoCont");
+
+  moviePromise.then((movie) => {
+    const imagePath = "https://image.tmdb.org/t/p/w300/";
+    let imgSrc = movie.poster_path ? imagePath + movie.poster_path : "";
+    container.style.opacity = 1;
+    container.style.zIndex = 100;
+console.log(movie)
+    container.innerHTML = `
+      <h1 id='exitMoreInfo'>&#x2716;</h1>
+      <h2>${movie.title}</h2>
+      <img src=${imgSrc ? imgSrc : ''} alt="No image available" />
+      <p><strong>Original title: </strong> ${movie.original_title}</p>
+      <p><strong>Release date: </strong> ${movie.release_date}</p>
+      <p><strong>Production companies:</strong> ${(function(){
+        let pcStr ='';
+        for(let c of movie.production_companies){
+          pcStr += c.name + ', ';
+        }
+        pcStr = pcStr.substring(0, pcStr.length - 2);
+        return pcStr
+      })()}</p>
+      <p><strong>Production countries:</strong> ${(function(){
+        let pcStr ='';
+        for(let c of movie.production_countries){
+          pcStr += c.name + ', ';
+        }
+        pcStr = pcStr.substring(0, pcStr.length - 2);
+        return pcStr
+      })()}</p>
+    `;
+    let exitMoreInfo = document.getElementById("exitMoreInfo");
+    exitMoreInfo.addEventListener("click", () => {
+      container.style.opacity = 0;
+      container.style.zIndex = -100;
+      container.innerHTML = "";
+    });
+  });
 }
 
 function removeFromList(e) {

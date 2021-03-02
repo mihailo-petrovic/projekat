@@ -109,11 +109,16 @@ function loginUser() {
   let password = logUserPass.value;
   let users = JSON.parse(localStorage.getItem("projectTMDBUsers"));
 
+  if (!users) {
+    logMessage.innerText = "No such user";
+    logMessage.classList.remove("disNone");
+    return;
+  }
   if (username == "" || password == "") {
     return;
   }
   let obj = users.find((user) => username === user.username);
-  if (obj == undefined) {
+  if (obj == undefined || obj == null) {
     logMessage.innerText = "No such user";
     logMessage.classList.remove("disNone");
     return;

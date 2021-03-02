@@ -30,15 +30,15 @@ exitSettings.addEventListener("click", closeSettings);
 saveUserBtn.addEventListener("click", (e) => {
   e.preventDefault();
   changeUsername();
-})
+});
 savePassBtn.addEventListener("click", (e) => {
   e.preventDefault();
   changePassword();
-})
+});
 deleteUserBtn.addEventListener("click", (e) => {
   e.preventDefault();
   deleteUser();
-})
+});
 
 searchBtn.addEventListener("click", () =>
   searchMovies(searchInput.value, resultsContainer)
@@ -80,11 +80,11 @@ function openSettings() {
 export default function closeSettings() {
   settingsDiv.style.opacity = 0;
   settingsDiv.style.display = "none";
-  let inputs = settingsDiv.getElementsByTagName('input');
-  for(let i of inputs){
-    i.value = '';
+  let inputs = settingsDiv.getElementsByTagName("input");
+  for (let i of inputs) {
+    i.value = "";
   }
-  settingsAlert.innerText = '';
+  settingsAlert.innerText = "";
 }
 
 renderLists("watchlist");
