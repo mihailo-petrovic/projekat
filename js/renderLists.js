@@ -23,15 +23,18 @@ function renderLists(list) {
       let id = el.id;
       let rating = el.rating;
       let moviePromise = getMovie(id);
-      moviePromise.then((movie) => {
-        if (rating) {
+      moviePromise
+        .then((movie) => {
           let item = renderListItem(movie, rating);
           container.innerHTML += item;
           return;
-        }
-        let item = renderListItem(movie);
-        container.innerHTML += item;
-      });
+        })
+        .then(() => {
+          let removeBtns = container.querySelectorAll(".removeBtn");
+          for (let b of removeBtns) {
+            b.addEventListener("click", (e) => removeFromList(e));
+          }
+        });
     }
   }
 }
@@ -64,7 +67,7 @@ function renderListItem(movie, rating) {
       <div class="listTitleDiv">
         <h4>${movie.title}</h4>
         <p>${rating} / 5</p>
-        <button class="btn">Remove</button>
+        <button class="btn removeBtn" data-id=${movie.id}>Remove</button>
       </div> 
     </div>
     <hr class="listHr">
@@ -77,13 +80,41 @@ function renderListItem(movie, rating) {
       </div>
       <div class="listTitleDiv">
         <h4>${movie.title}</h4>
-        <button class="btn">Remove</button>
+        <button class="btn removeBtn" data-id=${movie.id}>Remove</button>
       </div> 
     </div>
     <hr class="listHr">
   `;
   }
   return htmlStr;
+}
+
+function removeFromList(e) {
+  let username = JSON.parse(localStorage.getItem("loggedInTMDBUser"));
+  let users = JSON.parse(localStorage.getItem("projectTMDBUsers"));
+  let user = users.find((u) => u.username === username);
+  let movieID = e.target.dataset.id;
+  let btn = e.target;
+  let listId = btn.parentElement.parentElement.parentElement.id;
+  let list;
+  switch (listId) {
+    case "watchlistInnerCont":
+      list = "watchlist";
+      break;
+    case "ratedMoviesInnerCont":
+      list = "ratedMovies";
+      break;
+    case "favoritesInnerCont":
+      list = "favorites";
+      break;
+  }
+  let userList = user[list];
+  let movieIndex = userList.findIndex((m) => m.id === movieID);
+  userList.splice(movieIndex, 1);
+  localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
+  renderLists("favorites");
+  renderLists("watchlist");
+  renderLists("ratedMovies");
 }
 
 export default renderLists;

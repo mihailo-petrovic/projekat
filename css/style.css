@@ -120,7 +120,7 @@ body {
   text-align: center;
   padding: 0 10px;
 }
-.listTitleDiv button:hover {
+.listTitleDiv .removeBtn:hover {
   background-color: rgb(160, 40, 40);
 }
 .listItem h4 {
