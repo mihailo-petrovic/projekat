@@ -133,9 +133,12 @@ function loginUser() {
     localStorage.setItem("loggedInTMDBUser", JSON.stringify(obj.username));
     clearForms();
     fetch("./main.html")
-		  .then(() => {
-			redirect: window.location.replace("./main.html")
-		  })
+		  .then((res) => 
+		  {
+			window.history.pushState({"html":res.html,"pageTitle":res.pageTitle}, "","./main.html");
+			window.history.replaceState({"html":res.html,"pageTitle":res.pageTitle}, "","./main.html");
+			location.reload();
+		  })
   }
 }
 
