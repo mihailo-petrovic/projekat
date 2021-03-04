@@ -99,7 +99,7 @@ input[type="submit"]:focus {
 
 @media screen and (max-width: 500px) {
   .formDiv {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     margin: 0px;
     border-radius: 0px;

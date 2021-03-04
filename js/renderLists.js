@@ -6,7 +6,7 @@ function renderLists(list) {
   let listName = keys.find((k) => k === list);
   let listFinal = user[listName];
   var container = document.getElementById(list + "InnerCont");
-  
+
   if (listFinal.length == 0) {
     container.innerHTML = `<h3>No movies in the 
     ${
@@ -31,11 +31,15 @@ function renderLists(list) {
         .then(() => {
           let removeBtns = container.querySelectorAll(".removeBtn");
           let movieTitles = container.querySelectorAll(".movieTitle");
+          let movieImgs = container.querySelectorAll(".listImg");
           for (let b of removeBtns) {
             b.addEventListener("click", (e) => removeFromList(e));
           }
           for (let t of movieTitles) {
             t.addEventListener("click", (e) => moreInfo(e));
+          }
+          for (let img of movieImgs) {
+            img.addEventListener("click", (e) => moreInfo(e));
           }
         });
     }
@@ -65,7 +69,7 @@ function renderListItem(movie, rating) {
     htmlStr = `
     <div class="listItem">
       <div class="listImgDiv">
-        <img src="${imgSrc}" class="listImg" />
+        <img src="${imgSrc}" class="listImg" data-id=${movie.id}  />
       </div>
       <div class="listTitleDiv">
         <h4 data-id=${movie.id} class="movieTitle">${movie.title}</h4>
@@ -79,7 +83,7 @@ function renderListItem(movie, rating) {
     htmlStr = `
     <div class="listItem">
       <div class="listImgDiv">
-        <img src="${imgSrc}" class="listImg" />
+        <img src="${imgSrc}" class="listImg" data-id=${movie.id}  />
       </div>
       <div class="listTitleDiv">
         <h4 data-id=${movie.id} class="movieTitle">${movie.title}</h4>
@@ -102,29 +106,35 @@ function moreInfo(e) {
     let imgSrc = movie.poster_path ? imagePath + movie.poster_path : "";
     container.style.opacity = 1;
     container.style.zIndex = 100;
-console.log(movie)
+
     container.innerHTML = `
       <h1 id='exitMoreInfo'>&#x2716;</h1>
-      <h2>${movie.title}</h2>
-      <img src=${imgSrc ? imgSrc : ''} alt="No image available" />
-      <p><strong>Original title: </strong> ${movie.original_title}</p>
-      <p><strong>Release date: </strong> ${movie.release_date}</p>
-      <p><strong>Production companies:</strong> ${(function(){
-        let pcStr ='';
-        for(let c of movie.production_companies){
-          pcStr += c.name + ', ';
-        }
-        pcStr = pcStr.substring(0, pcStr.length - 2);
-        return pcStr
-      })()}</p>
-      <p><strong>Production countries:</strong> ${(function(){
-        let pcStr ='';
-        for(let c of movie.production_countries){
-          pcStr += c.name + ', ';
-        }
-        pcStr = pcStr.substring(0, pcStr.length - 2);
-        return pcStr
-      })()}</p>
+      <h2 id='moreInfoTitle'>${movie.title}</h2>
+      <div id='moreInfoGrid'>      
+        <div id='moreInfoTextDiv'>
+          <p><strong>Original title: </strong> ${movie.original_title}</p>
+          <p><strong>Release date: </strong> ${movie.release_date}</p>
+          <p><strong>Production companies:</strong> ${(function () {
+            let pcStr = "";
+            for (let c of movie.production_companies) {
+              pcStr += c.name + ", ";
+            }
+            pcStr = pcStr.substring(0, pcStr.length - 2);
+            return pcStr;
+          })()}</p>
+          <p><strong>Production countries:</strong> ${(function () {
+            let pcStr = "";
+            for (let c of movie.production_countries) {
+              pcStr += c.name + ", ";
+            }
+            pcStr = pcStr.substring(0, pcStr.length - 2);
+            return pcStr;
+          })()}</p>
+        </div>
+        <div id='moreInfoImgDiv'>
+          <img src=${imgSrc ? imgSrc : ""} alt="No image available" />
+        </div>
+      </div>
     `;
     let exitMoreInfo = document.getElementById("exitMoreInfo");
     exitMoreInfo.addEventListener("click", () => {
@@ -158,9 +168,7 @@ function removeFromList(e) {
   let movieIndex = userList.findIndex((m) => m.id === movieID);
   userList.splice(movieIndex, 1);
   localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
-  renderLists("favorites");
-  renderLists("watchlist");
-  renderLists("ratedMovies");
+  renderLists(list);
 }
 
 export default renderLists;
