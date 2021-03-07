@@ -1,5 +1,5 @@
 import searchMovies from "./searchMovies.js";
-import renderLists from "./renderLists.js";
+import renderList from "./renderLists.js";
 import changeUsername from "./changeUser.js";
 import changePassword from "./changePass.js";
 import deleteUser from "./deleteUser.js";
@@ -18,6 +18,7 @@ const savePassBtn = document.getElementById("savePassword");
 const saveUserBtn = document.getElementById("saveUsername");
 const deleteUserBtn = document.getElementById("deleteBtn");
 const settingsAlert = document.getElementById("settingsAlert");
+const sortSelect = document.getElementById("sortBySelect");
 
 // Listeners
 window.onload = () => {
@@ -53,6 +54,8 @@ searchLink.addEventListener("click", () => {
   window.scrollTo({ top: topC });
 });
 
+sortSelect.addEventListener("change", () => renderList("ratedMovies"));
+
 // Functions
 function onloadFunction() {
   let username = localStorage.getItem("loggedInTMDBUser");
@@ -87,6 +90,6 @@ export default function closeSettings() {
   settingsAlert.innerText = "";
 }
 
-renderLists("watchlist");
-renderLists("ratedMovies");
-renderLists("favorites");
+renderList("watchlist");
+renderList("ratedMovies");
+renderList("favorites");

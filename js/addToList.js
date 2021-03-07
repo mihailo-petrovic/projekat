@@ -1,4 +1,4 @@
-import renderLists from "./renderLists.js";
+import renderList from "./renderLists.js";
 
 function addToList(e, list) {
   let movieID = e.target.dataset.id;
@@ -17,7 +17,7 @@ function addToList(e, list) {
     favorites.push({ id: movieID, time: new Date() });
     users.splice(index, 1, user);
     localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
-    renderLists("favorites");
+    renderList("favorites");
     return;
   }
 
@@ -28,7 +28,7 @@ function addToList(e, list) {
     watchlist.push({ id: movieID, time: new Date() });
     users.splice(index, 1, user);
     localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
-    renderLists("watchlist");
+    renderList("watchlist");
     return;
   }
 
@@ -39,7 +39,7 @@ function addToList(e, list) {
     ratedMovies.push({ id: movieID, rating: e.target.value, time: new Date() });
     users.splice(index, 1, user);
     localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
-    renderLists("ratedMovies");
+    renderList("ratedMovies");
     return;
   }
 }

@@ -1,11 +1,12 @@
-function renderLists(list) {
+function renderList(list) {
+  const container = document.getElementById(list + "InnerCont");
+  const sortSelect = document.getElementById("sortBySelect");
   let username = JSON.parse(localStorage.getItem("loggedInTMDBUser"));
   let users = JSON.parse(localStorage.getItem("projectTMDBUsers"));
   let user = users.find((el) => el.username === username);
   let keys = Object.keys(user);
   let listName = keys.find((k) => k === list);
   let listFinal = user[listName];
-  var container = document.getElementById(list + "InnerCont");
 
   if (listFinal.length == 0) {
     container.innerHTML = `<h3>No movies in the 
@@ -16,33 +17,45 @@ function renderLists(list) {
         ? "rated movies"
         : "favorites"
     }</h3>`;
-  } else {
-    container.innerHTML = "";
-    for (let el of listFinal) {
-      let id = el.id;
-      let rating = el.rating;
-      let moviePromise = getMovie(id);
-      moviePromise
-        .then((movie) => {
-          let item = renderListItem(movie, rating);
-          container.innerHTML += item;
-          return;
-        })
-        .then(() => {
-          let removeBtns = container.querySelectorAll(".removeBtn");
-          let movieTitles = container.querySelectorAll(".movieTitle");
-          let movieImgs = container.querySelectorAll(".listImg");
-          for (let b of removeBtns) {
-            b.addEventListener("click", (e) => removeFromList(e));
+    return;
+  }
+
+  sortArray(sortSelect, list, listFinal);
+  container.innerHTML = "";
+  for (let el of listFinal) {
+    let movieDiv = document.createElement("div");
+    movieDiv.dataset.id = el.id;
+    movieDiv.classList.add("movieEmpty");
+    container.appendChild(movieDiv);
+
+    let divs = container.getElementsByClassName("movieEmpty");
+    let id = el.id;
+    let rating = el.rating;
+    let moviePromise = getMovie(id);
+    moviePromise
+      .then((movie) => {
+        let item = renderListItem(movie, rating);
+        for (let d of divs) {
+          if (d.dataset.id === id) {
+            d.innerHTML = item;
+            return;
           }
-          for (let t of movieTitles) {
-            t.addEventListener("click", (e) => moreInfo(e));
-          }
-          for (let img of movieImgs) {
-            img.addEventListener("click", (e) => moreInfo(e));
-          }
-        });
-    }
+        }
+      })
+      .then(() => {
+        let removeBtns = container.querySelectorAll(".removeBtn");
+        let movieTitles = container.querySelectorAll(".movieTitle");
+        let movieImgs = container.querySelectorAll(".listImg");
+        for (let b of removeBtns) {
+          b.addEventListener("click", (e) => removeFromList(e));
+        }
+        for (let t of movieTitles) {
+          t.addEventListener("click", (e) => moreInfo(e));
+        }
+        for (let img of movieImgs) {
+          img.addEventListener("click", (e) => moreInfo(e));
+        }
+      });
   }
 }
 
@@ -151,7 +164,7 @@ function removeFromList(e) {
   let user = users.find((u) => u.username === username);
   let movieID = e.target.dataset.id;
   let btn = e.target;
-  let listId = btn.parentElement.parentElement.parentElement.id;
+  let listId = btn.parentElement.parentElement.parentElement.parentElement.id;
   let list;
   switch (listId) {
     case "watchlistInnerCont":
@@ -168,7 +181,22 @@ function removeFromList(e) {
   let movieIndex = userList.findIndex((m) => m.id === movieID);
   userList.splice(movieIndex, 1);
   localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
-  renderLists(list);
+  renderList(list);
 }
 
-export default renderLists;
+function sortArray(sortSelect, list, listFinal) {
+  if (sortSelect.value === "ratingDesc" && list === "ratedMovies") {
+    listFinal.sort((a, b) => {
+      return b.rating - a.rating;
+    });
+  } else if (sortSelect.value === "ratingAsc" && list === "ratedMovies") {
+    listFinal.sort((a, b) => {
+      return a.rating - b.rating;
+    });
+  } else {
+    listFinal.sort((a, b) => {
+      return new Date(a.time) - new Date(b.time);
+    });
+  }
+}
+export default renderList;
