@@ -25,6 +25,7 @@ window.onload = () => {
   onloadFunction();
 };
 
+title.addEventListener("click", closeSettings);
 logOutLink.addEventListener("click", logOut);
 settingsLink.addEventListener("click", openSettings);
 exitSettings.addEventListener("click", closeSettings);
@@ -53,6 +54,7 @@ searchLink.addEventListener("click", () => {
   let topC = searchInput.offsetTop - 65;
   searchInput.focus();
   window.scrollTo({ top: topC });
+  closeSettings();
 });
 
 sortSelect.addEventListener("change", () => renderList("ratedMovies"));
