@@ -41,7 +41,7 @@ deleteUserBtn.addEventListener("click", (e) => {
   deleteUser();
 });
 
-searchBtn.addEventListener("click", () =>
+searchBtn.addEventListener("click", () => 
   searchMovies(searchInput.value, resultsContainer)
 );
 searchInput.addEventListener("keyup", (e) => {
@@ -51,6 +51,7 @@ searchInput.addEventListener("keyup", (e) => {
 });
 searchLink.addEventListener("click", () => {
   let topC = searchInput.offsetTop - 65;
+  searchInput.focus();
   window.scrollTo({ top: topC });
 });
 

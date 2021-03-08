@@ -119,6 +119,8 @@ function moreInfo(e) {
     let imgSrc = movie.poster_path ? imagePath + movie.poster_path : "";
     container.style.opacity = 1;
     container.style.zIndex = 100;
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100vh';
 
     container.innerHTML = `
       <h1 id='exitMoreInfo'>&#x2716;</h1>
@@ -154,6 +156,8 @@ function moreInfo(e) {
       container.style.opacity = 0;
       container.style.zIndex = -100;
       container.innerHTML = "";
+      document.body.style.overflow = 'visible';
+      document.body.style.height = 'auto';
     });
   });
 }

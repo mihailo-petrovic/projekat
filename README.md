@@ -1,4 +1,4 @@
-# Projekat: Baza Filmova
+# Projekat: Moje Liste Filmova
 
 Ovo je završni projekat kursa za Front End developera na Code akademiji.
 Projekat koristi The Movie Database (TMDB) API za izvlačenje podataka o filmovima. 
@@ -12,7 +12,7 @@ Plan rada aplikacije:
 5. Korisnik svaki sačuvani objekat o filmu u nekoj kategoriji može da obriše, kao i da ponovo oceni ili izmeni na neki drugi način, nakon čega se u "bazi" menja ili briše određeni objekat.
 6. Na kraju, korisnik može da se izloguje, što ga vraća na stranu za logovanje, gde mu više nisu dostupni podaci o svim filmovima koje je čuvao.
 
-# Project: Movie Database
+# Project: My Movie Lists
 
 This is my final project for the Code Academy Front End Developer course.
 The project uses The Movie Database (TMDB) API for extracting data about movies.

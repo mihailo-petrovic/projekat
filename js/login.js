@@ -23,11 +23,13 @@ window.onload = () => {
 regLink.addEventListener("click", () => {
   logForm.classList.add("disNone");
   regForm.classList.remove("disNone");
+  clearForms();
 });
 
 logLink.addEventListener("click", () => {
   logForm.classList.remove("disNone");
   regForm.classList.add("disNone");
+  clearForms();
 });
 
 registration.onsubmit = (e) => {
