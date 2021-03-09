@@ -110,6 +110,7 @@ function renderListItem(movie, rating) {
 }
 
 function moreInfo(e) {
+  e.stopImmediatePropagation();
   let movieID = e.target.dataset.id;
   let moviePromise = getMovie(movieID);
   let container = document.getElementById("moreInfoCont");
@@ -163,11 +164,12 @@ function moreInfo(e) {
 }
 
 function removeFromList(e) {
+  e.stopImmediatePropagation();
   let btn = e.target;
   let username = JSON.parse(localStorage.getItem("loggedInTMDBUser"));
   let users = JSON.parse(localStorage.getItem("projectTMDBUsers"));
   let user = users.find((u) => u.username === username);
-  let movieID = e.target.dataset.id;
+  let movieID = btn.dataset.id;
   let listId = btn.parentElement.parentElement.parentElement.parentElement.id;
   let divElement = btn.parentElement.parentElement.parentElement;
   let list;
@@ -187,7 +189,7 @@ function removeFromList(e) {
   userList.splice(movieIndex, 1);
   localStorage.setItem("projectTMDBUsers", JSON.stringify(users));
   divElement.remove();
-  if(userList.length === 0){
+  if (userList.length === 0) {
     renderList(list);
   }
 }
